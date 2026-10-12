@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeriesApp - Recomendaciones</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#e50914" />
+
+  <!-- CDN de Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">🍿 SeriesApp</div>
+    <nav class="nav">
+      <span id="user-info" class="user-info">Modo Demo (Sin Login)</span>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <!-- SECCIÓN FORMULARIO (CREAR Y EDITAR) -->
+    <section id="sec-formulario" class="card-form">
+      <h2>Recomendar una Serie</h2>
+      <p class="subtitle">Compartí con la comunidad tus series favoritas</p>
+
+      <form id="form-serie">
+        <!-- Campo oculto para guardar el ID cuando se edita una serie -->
+        <input type="hidden" id="serie-id">
+
+        <div class="form-group">
+          <label for="titulo">Título de la serie</label>
+          <input type="text" id="titulo" placeholder="Ej: Stranger Things" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="genero">Género</label>
+            <select id="genero" required>
+              <option value="" disabled selected>Seleccioná...</option>
+              <option value="Ciencia Ficción">Ciencia Ficción</option>
+              <option value="Drama">Drama</option>
+              <option value="Comedia">Comedia</option>
+              <option value="Acción">Acción</option>
+              <option value="Terror">Terror</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="puntuacion">Puntuación (1 al 10)</label>
+            <input type="number" id="puntuacion" min="1" max="10" step="0.5" value="8" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="imagen-file">Foto de la Portada</label>
+          <input type="file" id="imagen-file" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+          <label for="resena">¿Por qué la recomendás? (Reseña breve)</label>
+          <textarea id="resena" rows="3" placeholder="Contanos qué es lo que más te gustó..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Publicar Recomendación</button>
+      </form>
+    </section>
+
+    <!-- SECCIÓN CATÁLOGO / LISTADO -->
+    <section class="catalog-section">
+      <h2>Series Recomendadas</h2>
+      <div id="grid-series" class="grid-cards">
+        <!-- Las tarjetas con sus botones de Editar y Eliminar se cargan dinámicamente con JS -->
+      </div>  
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Proyecto Demo - Escuela Técnica | Desarrollo de Software</p>
+  </footer>
+
+  <!-- Carga de scripts en orden -->
+  <script src="supabaseClient.js"></script>
+  <script src="main.js"></script>  
+
+</body>
+</html>
